@@ -1,0 +1,1 @@
+# algo-trader-asafm  initgit add README.mdgit commit -m "first commit"git remote add origin https://github.com/asafm222/algo-trader-asafm.gitgit push -u origin master
