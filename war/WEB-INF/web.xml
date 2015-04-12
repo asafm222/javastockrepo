@@ -4,15 +4,39 @@ xmlns="http://java.sun.com/xml/ns/javaee"
 xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+	
 	<servlet>
-		<servlet-name>Algo_trader_asafm</servlet-name>
-		<servlet-class>com.algoTrader.javacourse.Algo_trader_asafmServlet</servlet-class>
+		<servlet-name>MathServlet</servlet-name>
+		<servlet-class>com.algoTrader.javacourse.MathServlet</servlet-class>
 	</servlet>
+	
 	<servlet-mapping>
-		<servlet-name>Algo_trader_asafm</servlet-name>
-		<url-pattern>/algo_trader_asafm</url-pattern>
+		<servlet-name>MathServlet</servlet-name>
+		<url-pattern>/MathServlet</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+	<servlet-name>MathServlet</servlet-name>
+	<servlet-class>com.algoTrader.javacourse.MathServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+	<servlet-name>MathServlet</servlet-name>
+	<url-pattern>/MathServlet</url-pattern>
+	</servlet-mapping>
+	
+		<servlet>
+	<servlet-name>Algo_trader_asafmServlet</servlet-name>
+	<servlet-class>com.algoTrader.javacourse.Algo_trader_asafmServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+	<servlet-name>Algo_trader_asafmServlet</servlet-name>
+	<url-pattern>/Algo_trader_asafmServlet</url-pattern>
+	</servlet-mapping>
+	
 	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
+	<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
+	
 </web-app>
