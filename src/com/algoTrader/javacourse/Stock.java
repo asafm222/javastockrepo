@@ -1,11 +1,19 @@
 package com.algoTrader.javacourse;
 
+
 public class Stock {
+
+	public static int BUY = 0;
+	public static int SELL = 1;
+	public static int REMOVE = 2;
+	public static int HOLD = 3;
 	
 	private String symbol;
 	private float ask;
 	private float bid;
 	private java.util.Date date;
+	int recommendation;
+	int stockQuantity;
 	
 	public Stock(String symbol,float ask,float bid,java.util.Date date){
 		this.symbol = symbol;
