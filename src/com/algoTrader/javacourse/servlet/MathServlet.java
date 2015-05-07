@@ -1,4 +1,4 @@
-package com.algoTrader.javacourse;
+package com.algoTrader.javacourse.servlet;
 
 import java.io.IOException;
 import java.math.MathContext;

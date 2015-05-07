@@ -1,12 +1,18 @@
-package com.algoTrader.javacourse;
+package com.algoTrader.javacourse.model;
 
+import java.util.Date;
 
+/**
+class stock
+
+created by asaf mashiah!! 
+ */
 public class Stock {
 
-	public static int BUY = 0;
-	public static int SELL = 1;
-	public static int REMOVE = 2;
-	public static int HOLD = 3;
+	public enum action
+	{
+		BUY,SELL,REMOVE,HOLD
+	}
 	
 	private String symbol;
 	private float ask;
@@ -21,6 +27,16 @@ public class Stock {
 		this.bid = bid;
 		this.date = date;
 	}
+	
+	public Stock(Stock stock)
+	{
+		//this(new String(stock.getSymbol()),stock.ask,stock.bid,new Date(stock.getDate().getTime()));
+		this.symbol = new String(stock.getSymbol());
+		this.ask = stock.ask;
+		this.bid = stock.bid;
+		this.date = new Date(stock.getDate().getTime());
+	}
+	
 	public String getSymbol() {
 		return symbol;
 	}	
@@ -46,8 +62,11 @@ public class Stock {
 		this.date = date;
 	}
 	
-	
-	
+	/**
+	return string of all the stock details
+
+	created by asaf mashiah!! 
+	 */
 	public String getHtmlDescription(){
 		String stockDetail = new String("<b>Stock symbol</b>:"+getSymbol()+" <b>ask</b>:"
 				+getAsk()+" <b>bid</b>:"+getBid()+" <b>date</b>:"+getDate().getDate()+ "/"

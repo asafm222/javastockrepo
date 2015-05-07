@@ -1,4 +1,4 @@
-package com.algoTrader.javacourse;
+package com.algoTrader.javacourse.servlet;
 
 import java.io.IOException;
 import java.util.Calendar;
@@ -7,6 +7,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.algoTrader.javacourse.model.Stock;
 
 public class StockDetailsServlet extends HttpServlet{
 	

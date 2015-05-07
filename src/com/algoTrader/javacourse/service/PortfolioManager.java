@@ -2,10 +2,14 @@ package com.algoTrader.javacourse.service;
 
 import java.util.Calendar;
 
-import com.algoTrader.javacourse.Stock;
 import com.algoTrader.javacourse.model.Portfolio;
+import com.algoTrader.javacourse.model.Stock;
 
+/**
+create a new portfolio with the some values 
 
+created by asaf mashiah!! 
+ */
 public class PortfolioManager {
 	
 	public Portfolio getPortfolio()
