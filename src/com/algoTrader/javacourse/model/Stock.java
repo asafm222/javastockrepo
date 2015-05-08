@@ -2,25 +2,22 @@ package com.algoTrader.javacourse.model;
 
 import java.util.Date;
 
+import com.algoTrader.javacourse.model.Portfolio.ALGO_RECOMMENDATION;
+
 /**
 class stock
 
 created by asaf mashiah!! 
  */
 public class Stock {
-
-	public enum action
-	{
-		BUY,SELL,REMOVE,HOLD
-	}
 	
 	private String symbol;
 	private float ask;
 	private float bid;
 	private java.util.Date date;
-	int recommendation;
+	ALGO_RECOMMENDATION recommendation;
 	int stockQuantity;
-	
+
 	public Stock(String symbol,float ask,float bid,java.util.Date date){
 		this.symbol = symbol;
 		this.ask = ask;
@@ -62,6 +59,22 @@ public class Stock {
 		this.date = date;
 	}
 	
+	public ALGO_RECOMMENDATION getRecommendation() {
+		return recommendation;
+	}
+
+	public void setRecommendation(ALGO_RECOMMENDATION recommendation) {
+		this.recommendation = recommendation;
+	}
+
+	public int getStockQuantity() {
+		return stockQuantity;
+	}
+
+	public void setStockQuantity(int stockQuantity) {
+		this.stockQuantity = stockQuantity;
+	}
+	
 	/**
 	return string of all the stock details
 
@@ -70,7 +83,7 @@ public class Stock {
 	public String getHtmlDescription(){
 		String stockDetail = new String("<b>Stock symbol</b>:"+getSymbol()+" <b>ask</b>:"
 				+getAsk()+" <b>bid</b>:"+getBid()+" <b>date</b>:"+getDate().getDate()+ "/"
-				+getDate().getMonth()+ "/" + getDate().getYear());
+				+getDate().getMonth()+ "/" + getDate().getYear()) + " <b>Quantity</b> " + getStockQuantity();
 		return stockDetail;
 	}
 
