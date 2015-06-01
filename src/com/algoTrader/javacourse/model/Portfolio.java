@@ -1,11 +1,14 @@
 package com.algoTrader.javacourse.model;
 
+import org.algo.model.PortfolioInterface;
+import org.algo.model.StockInterface;
+
 /**
 class Portfolio have arr of stocks max 5 stock
 
 created by asaf mashiah!! 
  */
-public class Portfolio {
+public class Portfolio implements PortfolioInterface{
 	
 	public enum ALGO_RECOMMENDATION
 	{
@@ -14,7 +17,7 @@ public class Portfolio {
 	
 	String title = new String();
 	final static int MAX_PORTFOLIO_SIZE = 5;
-	public Stock[] stocks;
+	public StockInterface[] stocks;
 	public int portfolioSize;
 	private float balance;
 	
@@ -44,12 +47,23 @@ public class Portfolio {
 		}
 	}
 	
+	public Portfolio(Stock[] stockArray) {
+		this.title = null;
+		this.portfolioSize = stockArray.length;
+		this.balance = 0;
+		this.stocks = new StockInterface[MAX_PORTFOLIO_SIZE];
+		for(int i = 0; i<this.portfolioSize; i++)
+		{
+			this.stocks[i]= new Stock ((Stock)stockArray[i]);
+		}
+	}
 	/**
 	add stock to the arr
 
 	created by asaf mashiah!! 
+	 * @param j 
 	 */
-	public void addStock(Stock stock)
+	public void addStock(Stock stock, int j)
 	{	
 		boolean stockExist = false;
 		
@@ -79,15 +93,15 @@ public class Portfolio {
 
 	created by asaf mashiah!! 
 	 */
-	public boolean removeStock(Stock stock)
+	public boolean removeStock(String symbol)
 	{
 		boolean sellSucceeded = true;
 		
 		for (int i = 0; i < this.portfolioSize; i++) 
 		{
-			if(this.stocks[i].getSymbol().equals(stock.getSymbol())) 
+			if(this.stocks[i].getSymbol().equals(symbol)) 
 			{
-				sellSucceeded = sellStock(stock.getSymbol(),-1);
+				sellSucceeded = sellStock(symbol,-1);
 				if(sellSucceeded == true)
 				{
 					this.stocks[i] = this.stocks[this.portfolioSize -1];
@@ -113,18 +127,18 @@ public class Portfolio {
 		{
 			if(this.stocks[i].getSymbol().equals(symbol)) 
 			{
-				if(stocks[i].stockQuantity >= quantity)
+				if(((Stock) this.stocks[i]).stockQuantity >= quantity)
 				{
 					if(quantity == -1)
 					{
-						this.balance += (stocks[i].stockQuantity * stocks[i].getBid());
-						stocks[i].stockQuantity = 0;
+						this.balance += ((Stock)this.stocks[i]).stockQuantity * stocks[i].getBid();
+						((Stock)this.stocks[i]).stockQuantity = 0;
 						return true;
 					}
 					else
 					{
 						this.balance += (quantity * stocks[i].getBid());
-						stocks[i].stockQuantity -= quantity;
+						((Stock)this.stocks[i]).stockQuantity -= quantity;
 						return true;
 					}
 				}
@@ -163,20 +177,20 @@ public class Portfolio {
 			}
 			if(stockExist == false && this.portfolioSize <= MAX_PORTFOLIO_SIZE)
 			{
-				addStock(stock);
+				addStock(stock, 0);
 				stockIndex = getPortfolioSize() -1;
 			}
 			if(quantity >= 0)
 			{
 				updateBalance(-purchase);
-				stocks[stockIndex].setStockQuantity(quantity);
+				((Stock)this.stocks[stockIndex]).setStockQuantity(quantity);
 				return true;
 			}
 			else if(quantity == -1)
 			{
 				while(quantity * stock.getAsk() <= this.balance)
 				{
-					stocks[stockIndex].stockQuantity++;
+					((Stock)this.stocks[stockIndex]).stockQuantity++;
 					updateBalance(-purchase);
 					quantity--;
 				}
@@ -201,7 +215,7 @@ public class Portfolio {
 	 */
 	public Stock[] getStocks()
 	{
-		return stocks;
+		return (Stock[]) stocks;
 	}
 	
 	/**
@@ -214,7 +228,7 @@ public class Portfolio {
 		String str = new String("<h1>" + getTitle() + "</h1>");
 		for (int i = 0; i < portfolioSize; i++)
 		{
-			str += stocks[i].getHtmlDescription();
+			str += ((Stock) stocks[i]).getHtmlDescription();
 			str += "<br>";
 		}
 		str += "Total Portfolio Value " + getTotalValue()+ "$" + "<br>";
@@ -246,7 +260,7 @@ public class Portfolio {
 		float stocksValue = 0;
 		for (int i = 0; i < this.portfolioSize; i++)
 		{
-			stocksValue += (stocks[i].getBid() * stocks[i].getStockQuantity());
+			stocksValue += (stocks[i].getBid() * ((Stock)this.stocks[i]).getStockQuantity());
 		}
 		return stocksValue;
 	}
@@ -283,6 +297,17 @@ public class Portfolio {
 	}
 	public void setStocks(Stock[] stocks) {
 		this.stocks = stocks;
+	}
+	public StockInterface findStock(String symbol) {
+		
+		for (int i = 0; i < this.portfolioSize; i++) 
+		{
+			if(this.stocks[i].getSymbol().equals(symbol)) 
+			{
+				return this.stocks[i];
+			}
+		}
+		return null;
 	}
 	
 }

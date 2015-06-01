@@ -2,6 +2,8 @@ package com.algoTrader.javacourse.model;
 
 import java.util.Date;
 
+import org.algo.model.StockInterface;
+
 import com.algoTrader.javacourse.model.Portfolio.ALGO_RECOMMENDATION;
 
 /**
@@ -9,15 +11,24 @@ class stock
 
 created by asaf mashiah!! 
  */
-public class Stock {
+public class Stock implements StockInterface{
 	
 	private String symbol;
 	private float ask;
 	private float bid;
-	private java.util.Date date;
+	transient private java.util.Date date;
 	ALGO_RECOMMENDATION recommendation;
 	int stockQuantity;
 
+	public Stock() {
+		this.symbol = new String();
+		this.bid = 0;
+		this.ask = 0;
+		this.date = new Date();
+		this.recommendation = ALGO_RECOMMENDATION.HOLD;
+		this.stockQuantity = 0;
+	}
+	
 	public Stock(String symbol,float ask,float bid,java.util.Date date){
 		this.symbol = symbol;
 		this.ask = ask;
@@ -33,7 +44,7 @@ public class Stock {
 		this.bid = stock.bid;
 		this.date = new Date(stock.getDate().getTime());
 	}
-	
+
 	public String getSymbol() {
 		return symbol;
 	}	
@@ -63,8 +74,8 @@ public class Stock {
 		return recommendation;
 	}
 
-	public void setRecommendation(ALGO_RECOMMENDATION recommendation) {
-		this.recommendation = recommendation;
+	public void setRecommendation(ALGO_RECOMMENDATION algo_RECOMMENDATION) {
+		this.recommendation = algo_RECOMMENDATION;
 	}
 
 	public int getStockQuantity() {
